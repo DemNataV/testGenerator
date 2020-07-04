@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Button onAction="#sayHelloWorld" text="Say 'Hello World'" />
+      <Label fx:id="helloWorld" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" onAction="#generateTestPlan" text="Сгенерить тест-план" GridPane.columnIndex="2" />
+      <RadioButton fx:id="radiobattonTree" mnemonicParsing="false" onAction="#selectTests" text="tree" GridPane.columnIndex="2" GridPane.rowIndex="7">
+         <toggleGroup>
+            <ToggleGroup fx:id="tests" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="radiobattonBranch" mnemonicParsing="false" onAction="#selectTests" selected="true" text="branch" toggleGroup="$tests" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      <RadioButton fx:id="radiobattonLeaf" mnemonicParsing="false" onAction="#selectTests" text="leaf" toggleGroup="$tests" GridPane.rowIndex="7" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
+         <image>
+            <Image url="@../../art/leaf.png" />
+         </image>
+      </ImageView>
+      <Label text=" Приоритет проверок" GridPane.rowIndex="10" />
+      <Label text="Повторяемость действий" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+      <RadioButton fx:id="radiobattonAll" mnemonicParsing="false" onAction="#selectRound" selected="true" text="All" GridPane.rowIndex="3">
+         <toggleGroup>
+            <ToggleGroup fx:id="round" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="radiobattonMax" mnemonicParsing="false" onAction="#selectRound" text="Max" toggleGroup="$round" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <RadioButton fx:id="radiobattonRandom" mnemonicParsing="false" onAction="#selectRound" text="Random" toggleGroup="$round" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <TextField fx:id="priorityInput" text="5" GridPane.rowIndex="11" />
+      <TextField fx:id="repiadInput" text="3" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
+         <image>
+            <Image url="@../../art/branch.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
+         <image>
+            <Image url="@../../art/tree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+         <image>
+            <Image url="@../../art/All.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <image>
+            <Image url="@../../art/Max.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <image>
+            <Image url="@../../art/Random.png" />
+         </image>
+      </ImageView>
+      <RadioButton mnemonicParsing="false" selected="true" text="API" GridPane.rowIndex="12" />
+      <RadioButton mnemonicParsing="false" text="Manual" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+      <RadioButton mnemonicParsing="false" text="UI" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+   </children>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>
