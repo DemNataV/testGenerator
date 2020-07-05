@@ -67,15 +67,13 @@ public class State {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         State state = (State) o;
-        return page.equals(state.page) &&
-                table.equals(state.table) &&
-                value.equals(state.value) &&
-                object.equals(state.object);
+        return Objects.equals(value, state.value) &&
+                Objects.equals(object, state.object);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(priority, epic, page, table, value, object);
+        return Objects.hash(value, object);
     }
 
     @Override

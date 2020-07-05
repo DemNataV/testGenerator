@@ -219,18 +219,18 @@ public void APITest(TestPlan testPlan){
                     abbreviation(testPlan.getTests().get(i).getAsserts().get(j).getActionWithVariation()) + n;
             n++;
 
-            test = test + '\t' + "Когда " + testPlan.getTests().get(i).getAsserts().get(j).getActionWithVariation().name();
+            test = test + "\n" + "Когда " + testPlan.getTests().get(i).getAsserts().get(j).getActionWithVariation().name();
 
             for (int k = 0; k < testPlan.getTests().get(i).getAsserts().get(j).getFinalStates().size(); k++) {
 
-                test = test + '\t' + "Тогда " + testPlan.getTests().get(i).getAsserts().get(j).getFinalStates().get(k).name();
+                test = test + "\n" + "Тогда " + testPlan.getTests().get(i).getAsserts().get(j).getFinalStates().get(k).name();
             }
         }
 
-        testPlanAPI = testPlanAPI + '\t' + name + '\t' + test;
+        testPlanAPI = testPlanAPI + "\n" + name + "\n" + test;
     }
 
-    String path = "APItest" + LocalDateTime.now();
+    String path = "APItest" + LocalDateTime.now() + ".feature";
 
     try(FileOutputStream fos = new FileOutputStream(path))
     {
