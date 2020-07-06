@@ -33,9 +33,13 @@ public class GraphGenerator {
         var avWithFS = avWithFinalState.creator(av);
 
         String color = new String();
+        graph = "digraph G {";
+        String postF = new String();
 
         switch (type) {
             case "All": {
+
+                postF = "All";
 
                 for (int i = 0; i < avWithFS.size(); i++) {
                     if (avWithFS.get(i).getFinalState().getObject().equals(object)) {
@@ -68,9 +72,10 @@ public class GraphGenerator {
                     }
 
                 }
-            }
+            } break;
 
             case "WithoutAssert": {
+                postF = "WithoutAssert";
                 ArrayList<String> initialStates = new ArrayList<>();
                 //ArrayList<InitialState> initialStates = new ArrayList<>();
 
@@ -118,8 +123,9 @@ public class GraphGenerator {
                     }
                 }
 
-            }
+            } break;
             case "AllObject": {
+                postF = "AllObject";
 
                 for (int i = 0; i < avWithFS.size(); i++) {
                     if (avWithFS.get(i).getFinalState().getObject().equals(object)) {
@@ -156,8 +162,9 @@ public class GraphGenerator {
                     }
 
                 }
-            }
+            } break;
             case "transitionAll": {
+                postF = "transitionAll";
 
                 for (int i = 0; i < avWithFS.size(); i++) {
                     var avF = avWithFinalState.foundAV(avWithFS, avWithFS.get(i).getFinalState());
@@ -169,8 +176,12 @@ public class GraphGenerator {
 
 
             }
+            String date = String.valueOf(LocalDateTime.now());
+            date=date.replaceAll(":","");
 
-            String path = "Graph" + LocalDateTime.now() + ".gv";
+            graph = graph + "}";
+
+            String path = "Graph" + postF + date +".gv";
 
             try (FileOutputStream fos = new FileOutputStream(path)) {
                 byte[] buffer = graph.getBytes();
@@ -190,6 +201,6 @@ public class GraphGenerator {
 
     @Override
     public String toString() {
-        return "digraph G {" + graph  + '}';
+        return graph ;
     }
 }

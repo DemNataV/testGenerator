@@ -7,7 +7,8 @@ public class TestSuite {
     int n;
 
     public TestSuite(ArrayList<Scenario> scenarios, int n) {
-        this.scenarios = scenarios;
+        var list = new ArrayList<Scenario>(scenarios);
+        this.scenarios = list;
         this.n = n;
     }
 

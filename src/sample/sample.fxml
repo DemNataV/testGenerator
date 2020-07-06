@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane id="path" alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Button onAction="#sayHelloWorld" text="Say 'Hello World'" />
       <Label fx:id="helloWorld" GridPane.rowIndex="1" />
@@ -70,10 +70,25 @@
       <RadioButton mnemonicParsing="false" selected="true" text="API" GridPane.rowIndex="12" />
       <RadioButton mnemonicParsing="false" text="Manual" GridPane.columnIndex="1" GridPane.rowIndex="12" />
       <RadioButton mnemonicParsing="false" text="UI" GridPane.columnIndex="2" GridPane.rowIndex="12" />
-      <Button mnemonicParsing="false" text="Выбрать файл" GridPane.columnIndex="1" fx:id="pathS" onAction="#selectPath"/>
-      <Label id="path" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button fx:id="pathS" mnemonicParsing="false" onAction="#selectPath" text="Выбрать файл" GridPane.columnIndex="1" />
+      <Label fx:id="pathF" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <RadioButton fx:id="All" mnemonicParsing="false" onAction="#selectGraph" selected="true" text="Все" GridPane.columnIndex="6" GridPane.rowIndex="2">
+         <toggleGroup>
+            <ToggleGroup fx:id="graph" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="WithoutAssert" mnemonicParsing="false" onAction="#selectGraph" text="Без проверок" toggleGroup="$graph" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+      <Button fx:id="graphButton" mnemonicParsing="false" onAction="#generateGraph" text="Сгенерить граф" GridPane.columnIndex="6" />
+      <Label text="Объект" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+      <TextField fx:id="objectInput" text="заявка" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+      <RadioButton fx:id="AllObject" mnemonicParsing="false" onAction="#selectGraph" text="Для обекта" toggleGroup="$graph" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+      <RadioButton fx:id="transitionAll" mnemonicParsing="false" onAction="#selectGraph" text="Еще что-то" toggleGroup="$graph" GridPane.columnIndex="6" GridPane.rowIndex="7" />
    </children>
    <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
       <ColumnConstraints />
       <ColumnConstraints />
       <ColumnConstraints />

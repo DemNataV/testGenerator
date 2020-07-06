@@ -23,6 +23,7 @@ public class TestGenerator {
 
 
 
+
 public SetOfScenarios createTestPlanWithoutAssert(ArrayList<Action> actions,String round, int repiad){
 
     var av = actionWithVariation.creator(actions);
@@ -43,77 +44,81 @@ public SetOfScenarios createTestPlanWithoutAssert(ArrayList<Action> actions,Stri
                     var avFound = avWithFinalState.foundAV(avWithFS, scenarios.get(j).getInitialStates().get(k));
                     ArrayList<AVWithInitialStates> foundAvWithIS = avWithInitialStates.creator(avFound);
 
-                    if (foundAvWithIS.size() == 0) continue;
-                    scenarios.get(j).getInitialStates().remove(scenarios.get(j).getInitialStates().get(k));
-                    testSuite.setN(testSuite.getN() - 1);
 
-                    Scenario sc = scenarios.get(j);
-                    testSuite.getScenarios().remove(scenarios.get(j));
+                        scenarios.get(j).getInitialStates().remove(scenarios.get(j).getInitialStates().get(k));
+                        testSuite.setN(testSuite.getN() - 1);
 
-                    TreeSet<AVWithInitialStates> sortFoundAvWithIS = new TreeSet<>();
-                    sortFoundAvWithIS.addAll(foundAvWithIS);
+                        Scenario sc = scenarios.get(j);
+                        testSuite.getScenarios().remove(scenarios.get(j));
 
-                    switch (round) {
-                        case "All": {
-                            for (int l = 0; l < foundAvWithIS.size(); l++) {
+                        TreeSet<AVWithInitialStates> sortFoundAvWithIS = new TreeSet<>();
+                        sortFoundAvWithIS.addAll(foundAvWithIS);
 
-                                if (sc.foundCountAv(foundAvWithIS.get(l).getActionWithVariation()) < repiad) { //проверка на зацикливание
-                                    Scenario scen = sc;
-                                    scen.getActionWithVariations().add(foundAvWithIS.get(l).getActionWithVariation());
-                                    scen.getInitialStates().addAll(foundAvWithIS.get(l).getInitialStates());
+                        switch (round) {
+                            case "All": {
+                                for (int l = 0; l < foundAvWithIS.size(); l++) {
 
-                                    testSuite.getScenarios().add(scen);
-                                    testSuite.setN(testSuite.getN() + foundAvWithIS.get(l).getInitialStates().size());
+                                    if (sc.foundCountAv(foundAvWithIS.get(l).getActionWithVariation()) < repiad) { //проверка на зацикливание
+                                        Scenario scen = sc;
+                                        scen.getActionWithVariations().add(foundAvWithIS.get(l).getActionWithVariation());
+                                        scen.getInitialStates().addAll(foundAvWithIS.get(l).getInitialStates());
+
+                                        testSuite.getScenarios().add(scen);
+                                        testSuite.setN(testSuite.getN() + foundAvWithIS.get(l).getInitialStates().size());
+                                    }
                                 }
                             }
-                        }
-                        case "Max": {
-                            if (sortFoundAvWithIS.size() != 0) {
+                            break;
+                            case "Max": {
+                                if (sortFoundAvWithIS.size() != 0) {
 
-                                if (sc.foundCountAv(sortFoundAvWithIS.first().getActionWithVariation()) < repiad) { //проверка на зацикливание
-                                    Scenario scen = sc;
-                                    scen.getActionWithVariations().add(sortFoundAvWithIS.first().getActionWithVariation());
-                                    scen.getInitialStates().addAll(sortFoundAvWithIS.first().getInitialStates());
+                                    if (sc.foundCountAv(sortFoundAvWithIS.first().getActionWithVariation()) < repiad) { //проверка на зацикливание
+                                        Scenario scen = sc;
+                                        scen.getActionWithVariations().add(sortFoundAvWithIS.first().getActionWithVariation());
+                                        scen.getInitialStates().addAll(sortFoundAvWithIS.first().getInitialStates());
 
-                                    testSuite.getScenarios().add(scen);
-                                    testSuite.setN(testSuite.getN() + sortFoundAvWithIS.first().getInitialStates().size());
+                                        testSuite.getScenarios().add(scen);
+                                        testSuite.setN(testSuite.getN() + sortFoundAvWithIS.first().getInitialStates().size());
+                                    }
                                 }
                             }
-                        }
-                        case "Random":
-                            HashMap<AVWithInitialStates, Integer> weigthFoundAvWithIS = new HashMap<>();
-                            int n = 0;
+                            break;
+                            case "Random": {
+                                HashMap<AVWithInitialStates, Integer> weigthFoundAvWithIS = new HashMap<>();
+                                int n = 0;
 
-                        {
-                            for (int l = 0; l < foundAvWithIS.size(); l++) {
-                                n = n + foundAvWithIS.get(l).getActionWithVariation().getAction().getbValue() +
-                                        foundAvWithIS.get(l).getActionWithVariation().getVariation().getBValue();
-                                weigthFoundAvWithIS.put(foundAvWithIS.get(l), n);
-                            }
+                                {
+                                    for (int l = 0; l < foundAvWithIS.size(); l++) {
+                                        n = n + foundAvWithIS.get(l).getActionWithVariation().getAction().getbValue() +
+                                                foundAvWithIS.get(l).getActionWithVariation().getVariation().getBValue();
+                                        weigthFoundAvWithIS.put(foundAvWithIS.get(l), n);
+                                    }
 
-                            int p = (int) (Math.random() * n + 1);
+                                    int p = (int) (Math.random() * n + 1);
 
-                            AVWithInitialStates randomFoundAvWithIS = new AVWithInitialStates();
+                                    AVWithInitialStates randomFoundAvWithIS = new AVWithInitialStates();
 
-                            for (Map.Entry<AVWithInitialStates, Integer> entry : weigthFoundAvWithIS.entrySet()) {
-                                if (entry.getValue() >= p) {
-                                    randomFoundAvWithIS = entry.getKey();
-                                    break;
+                                    for (Map.Entry<AVWithInitialStates, Integer> entry : weigthFoundAvWithIS.entrySet()) {
+                                        if (entry.getValue() >= p) {
+                                            randomFoundAvWithIS = entry.getKey();
+                                            break;
+                                        }
+                                        ;
+                                    }
+
+                                    if (sc.foundCountAv(randomFoundAvWithIS.getActionWithVariation()) < repiad) { //проверка на зацикливание
+                                        Scenario scen = sc;
+
+                                        scen.getActionWithVariations().add(randomFoundAvWithIS.getActionWithVariation());
+                                        scen.getInitialStates().addAll(randomFoundAvWithIS.getInitialStates());
+
+                                        testSuite.getScenarios().add(scen);
+                                        testSuite.setN(testSuite.getN() + randomFoundAvWithIS.getInitialStates().size());
+                                    }
                                 }
-                                ;
-                            }
-
-                            if (sc.foundCountAv(randomFoundAvWithIS.getActionWithVariation()) < repiad) { //проверка на зацикливание
-                                Scenario scen = sc;
-
-                                scen.getActionWithVariations().add(randomFoundAvWithIS.getActionWithVariation());
-                                scen.getInitialStates().addAll(randomFoundAvWithIS.getInitialStates());
-
-                                testSuite.getScenarios().add(scen);
-                                testSuite.setN(testSuite.getN() + randomFoundAvWithIS.getInitialStates().size());
-                            }
+                            }break;
                         }
-                    }
+
                 }
             }
         }
@@ -133,9 +138,10 @@ public TestPlan TestPlanWithAssert(SetOfScenarios setOfScenarios, String type, i
     for (int i = 0; i < setOfScenarios.getTestSuites().size(); i++) {
         for (int j = 0; j < setOfScenarios.getTestSuites().get(i).getScenarios().size(); j++) {
             ArrayList<ActionWithVariation> testWithoutAssert = new ArrayList<>();
-            for (int k = 0; k < setOfScenarios.getTestSuites().get(i).getScenarios().get(j).getActionWithVariations().size(); k++) {
+            for (int k = setOfScenarios.getTestSuites().get(i).getScenarios().get(j).getActionWithVariations().size()-1;
+                 k >= 0; k--) {
                 testWithoutAssert.add(setOfScenarios.getTestSuites().get(i).getScenarios().get(j).getActionWithVariations()
-                        .get(setOfScenarios.getTestSuites().get(i).getScenarios().get(j).getActionWithVariations().size() - k));
+                        .get(k));
             }
                 switch (type){
                    case "leaf":{
@@ -230,7 +236,10 @@ public void APITest(TestPlan testPlan){
         testPlanAPI = testPlanAPI + "\n" + name + "\n" + test;
     }
 
-    String path = "APItest" + LocalDateTime.now() + ".feature";
+    String date = String.valueOf(LocalDateTime.now());
+    date=date.replaceAll(":","");
+
+    String path = "APItest" + date + ".feature";
 
     try(FileOutputStream fos = new FileOutputStream(path))
     {

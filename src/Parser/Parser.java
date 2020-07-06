@@ -300,7 +300,7 @@ public class Parser {
     }
 
     public static InitialState visitInitialState(Node node){
-        System.out.println(node.getTextContent());
+
         if (getAttributeValue(node, "TEXT").equals("initial state")){
            var list = node.getChildNodes();
             for (int i = 0; i < list.getLength(); i++) {

@@ -5,11 +5,13 @@ import java.util.ArrayList;
 public class TestPlan {
     ArrayList<Test> tests;
 
+    public TestPlan() {
+        this.tests = new ArrayList<>();
+    }
+
     public ArrayList<Test> getTests() {
         return tests;
     }
 
-    public void setTests(ArrayList<Test> tests) {
-        this.tests = tests;
-    }
+
 }

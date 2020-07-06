@@ -5,13 +5,15 @@ import java.util.ArrayList;
 public class Test {
     ArrayList<Asserts> asserts;
 
+    public Test() {
+        this.asserts = new ArrayList<>();
+    }
+
     public ArrayList<Asserts> getAsserts() {
         return asserts;
     }
 
-    public void setAsserts(ArrayList<Asserts> asserts) {
-        this.asserts = asserts;
-    }
+
 
     @Override
     public String toString() {

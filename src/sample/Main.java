@@ -8,11 +8,14 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    static Stage prim;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+        prim = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Генератор тестов");
-        primaryStage.setScene(new Scene(root, 700, 600));
+        primaryStage.setScene(new Scene(root, 1000, 600));
         primaryStage.show();
     }
 
