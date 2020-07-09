@@ -51,7 +51,7 @@ public class Controller {
 
     public void generateTestPlan(ActionEvent actionEvent) {
         Parser parser = new Parser();
-        var actions = parser.parserToObject();
+        var actions = parser.parserToObject(path);
         //System.out.println(actions);
         TestGenerator testGenerator = new TestGenerator();
         int priority = Integer.parseInt(priorityInput.getText());
@@ -65,7 +65,7 @@ public class Controller {
 
     public void generateGraph(ActionEvent actionEvent) {
         Parser parser = new Parser();
-        var actions = parser.parserToObject();
+        var actions = parser.parserToObject(path);
 
         GraphGenerator graphGenerator = new GraphGenerator();
 

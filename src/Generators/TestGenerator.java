@@ -104,15 +104,17 @@ public SetOfScenarios createTestPlanWithoutAssert(ArrayList<Action> actions,Stri
                                         }
                                         ;
                                     }
+                                    if (randomFoundAvWithIS.getActionWithVariation() != null) {
 
-                                    if (sc.foundCountAv(randomFoundAvWithIS.getActionWithVariation()) < repiad) { //проверка на зацикливание
-                                        Scenario scen = sc;
+                                        if (sc.foundCountAv(randomFoundAvWithIS.getActionWithVariation()) < repiad) { //проверка на зацикливание
+                                            Scenario scen = sc;
 
-                                        scen.getActionWithVariations().add(randomFoundAvWithIS.getActionWithVariation());
-                                        scen.getInitialStates().addAll(randomFoundAvWithIS.getInitialStates());
+                                            scen.getActionWithVariations().add(randomFoundAvWithIS.getActionWithVariation());
+                                            scen.getInitialStates().addAll(randomFoundAvWithIS.getInitialStates());
 
-                                        testSuite.getScenarios().add(scen);
-                                        testSuite.setN(testSuite.getN() + randomFoundAvWithIS.getInitialStates().size());
+                                            testSuite.getScenarios().add(scen);
+                                            testSuite.setN(testSuite.getN() + randomFoundAvWithIS.getInitialStates().size());
+                                        }
                                     }
                                 }
                             }break;

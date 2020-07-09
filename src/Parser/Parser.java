@@ -20,7 +20,7 @@ public class Parser {
     public static ArrayList<Action> actions = new ArrayList<>();
 
 
-    public ArrayList<Action> parserToObject() {
+    public ArrayList<Action> parserToObject(String path) {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = null;
         try {
@@ -30,7 +30,7 @@ public class Parser {
         }
         Document doc = null;
         try {
-            doc = db.parse(new File("new_version.mm"));
+            doc = db.parse(new File(path)); //"new_version.mm"
         } catch (SAXException e) {
             e.printStackTrace();
         } catch (IOException e) {

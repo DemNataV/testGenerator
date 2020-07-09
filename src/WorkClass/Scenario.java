@@ -35,7 +35,7 @@ public class Scenario {
     public int foundCountAv(ActionWithVariation actionWithVariation){
         int n = 0;
         for (int i = 0; i < actionWithVariations.size(); i++) {
-            if (actionWithVariations.get(i).equals(actionWithVariation)){
+            if (actionWithVariations.get(i).name().equals(actionWithVariation.name())){
                 n++;
             }
         }
