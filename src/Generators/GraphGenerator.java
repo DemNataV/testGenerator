@@ -71,7 +71,8 @@ public class GraphGenerator {
                     }
 
                 }
-            } break;
+            }
+            break;
 
             case "WithoutAssert": {
                 postF = "WithoutAssert";
@@ -122,7 +123,8 @@ public class GraphGenerator {
                     }
                 }
 
-            } break;
+            }
+            break;
             case "AllObject": {
                 postF = "AllObject";
 
@@ -161,7 +163,8 @@ public class GraphGenerator {
                     }
 
                 }
-            } break;
+            }
+            break;
             case "transitionAll": {
                 postF = "transitionAll";
 
@@ -169,12 +172,11 @@ public class GraphGenerator {
                     var avF = avWithFinalState.foundAV(avWithFS, avWithFS.get(i).getFinalState());
 
 
-
-
                 }
 
 
             }
+        }
             String date = String.valueOf(LocalDateTime.now());
             date=date.replaceAll(":","");
 
@@ -190,9 +192,9 @@ public class GraphGenerator {
 
                 System.out.println(ex.getMessage());
             }
-            System.out.println("The file has been written");
+            System.out.println("The file has been written" + path);
         }
-    }
+
 
 
 

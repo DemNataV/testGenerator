@@ -10,7 +10,7 @@ public class TstTest {
         TestGenerator testGenerator = new TestGenerator();
         int priority = 5;
         int repiad = 3;
-        String roundS = "Max";
+        String roundS = "All";
         String testD = "tree";
 
         testGenerator.APITest(testGenerator.TestPlanWithAssert(testGenerator.createTestPlanWithoutAssert(actions, roundS, repiad), testD, priority));

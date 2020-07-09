@@ -9,7 +9,7 @@ public class TstGraph {
 
         GraphGenerator graphGenerator = new GraphGenerator();
 
-        graphGenerator.createGraph(actions, "", "Random");
+        graphGenerator.createGraph(actions, "", "All");
         //System.out.println(graphGenerator.toString());
 
 
