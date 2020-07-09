@@ -1,7 +1,6 @@
-package TestPlan;
+package Generators;
 
 import ClassXml.Action;
-import ClassXml.InitialState;
 import WorkClass.AVWithFinalState;
 import WorkClass.AVWithInitialStates;
 import WorkClass.ActionWithVariation;

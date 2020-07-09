@@ -1,8 +1,8 @@
 package sample;
 
 import Parser.Parser;
-import TestPlan.GraphGenerator;
-import TestPlan.TestGenerator;
+import Generators.GraphGenerator;
+import Generators.TestGenerator;
 import javafx.event.ActionEvent;
 
 //import java.awt.*;
@@ -10,9 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.io.File;
 

@@ -48,7 +48,7 @@ public class AVWithFinalState {
     public ArrayList<ActionWithVariation> foundAV(ArrayList<AVWithFinalState> avWithFinalStates, State initialState){
         ArrayList<ActionWithVariation> avForFS = new ArrayList<>();
         for (int i = 0; i < avWithFinalStates.size(); i++) {
-            if (avWithFinalStates.get(i).getFinalState().equals(initialState)){
+            if (avWithFinalStates.get(i).getFinalState().name().equals(initialState.name())){
                 avForFS. add(avWithFinalStates.get(i).getActionWithVariation());
             }
         }

@@ -1,10 +1,9 @@
-package TestPlan;
+package Generators;
 
 import ClassXml.Action;
 import ClassXml.FinalState;
 import WorkClass.*;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -217,21 +216,25 @@ public void APITest(TestPlan testPlan){
     String testPlanAPI = new String();
     var n = 0;
     for (int i = 0; i < testPlan.getTests().size(); i++) {
-        String name = new String();
+        String name = "\n" + "Сценарий:";
         String test = new String();
         for (int j = 0; j < testPlan.getTests().get(i).getAsserts().size(); j++) {
             //String tempName = name;
             name = name + testPlan.getTests().get(i).getAsserts().get(j).getActionWithVariation().
-                    abbreviation(testPlan.getTests().get(i).getAsserts().get(j).getActionWithVariation()) + n;
-            n++;
+                    abbreviation(testPlan.getTests().get(i).getAsserts().get(j).getActionWithVariation());
 
             test = test + "\n" + "Когда " + testPlan.getTests().get(i).getAsserts().get(j).getActionWithVariation().name();
 
-            for (int k = 0; k < testPlan.getTests().get(i).getAsserts().get(j).getFinalStates().size(); k++) {
+            if (testPlan.getTests().get(i).getAsserts().get(j).getFinalStates() != null) {
 
-                test = test + "\n" + "Тогда " + testPlan.getTests().get(i).getAsserts().get(j).getFinalStates().get(k).name();
+                for (int k = 0; k < testPlan.getTests().get(i).getAsserts().get(j).getFinalStates().size(); k++) {
+
+                    test = test + "\n" + "Тогда " + testPlan.getTests().get(i).getAsserts().get(j).getFinalStates().get(k).name();
+                }
             }
         }
+        name = name + n;
+        n++;
 
         testPlanAPI = testPlanAPI + "\n" + name + "\n" + test;
     }

@@ -1,4 +1,4 @@
-package TestPlan;
+package Generators;
 
 import Parser.Parser;
 
