@@ -244,7 +244,7 @@ public void APITest(TestPlan testPlan){
     String date = String.valueOf(LocalDateTime.now());
     date=date.replaceAll(":","");
 
-    String path = "APItest" + date + ".feature";
+    String path = "APItest/" + date + ".feature";
 
     try(FileOutputStream fos = new FileOutputStream(path))
     {
@@ -256,7 +256,7 @@ public void APITest(TestPlan testPlan){
 
         System.out.println(ex.getMessage());
     }
-    System.out.println("The file has been written");
+    System.out.println("The file has been written " + path);
 }
 
 }

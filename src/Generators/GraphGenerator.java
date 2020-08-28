@@ -32,7 +32,7 @@ public class GraphGenerator {
         var avWithFS = avWithFinalState.creator(av);
 
         String color = new String();
-        graph = "digraph G {";
+        graph = "digraph G {" + "\n" + "size=500";
         String postF = new String();
 
         switch (type) {
@@ -51,7 +51,7 @@ public class GraphGenerator {
                     String fs = avWithFS.get(i).getFinalState().name().replaceAll("\"", "");
 
                     if (!acvar.equals("null null") && !fs.equals("null null")) {
-                        graph = graph + "\n" + "\"" + acvar + "\"" + "->" + "\"" + fs + "\"" + " [color=" + color + "];";
+                        graph = graph + "\n" + "\"" + acvar + "\"" + "->" + "\"" + fs + "\"" + " [color=" + color  + "];";
                         graph = graph + "\n" + "\"" + acvar + "\"" + " [shape=box];";
                         if (avWithFS.get(i).getFinalState().getPriority() > 0) {
                             graph = graph + "\n" + "\"" + fs + "\"" + " [shape=triangle];";
@@ -66,7 +66,7 @@ public class GraphGenerator {
                         String is = avWithIS.get(i).getInitialStates().get(j).name().replaceAll("\"", "");
 
                         if (!acvar.equals("null null") && !is.equals("null null")) {
-                            graph = graph + "\n" + "\"" + is + "\"" + "->" + "\"" + acvar + "\"" + ";";
+                            graph = graph + "\n" + "\"" + is + "\"" + "->" + "\"" + acvar + "\"" + " [shape=ellipse];";
                         }
                     }
 
@@ -182,7 +182,7 @@ public class GraphGenerator {
 
             graph = graph + "}";
 
-            String path = "Graph" + postF + date +".gv";
+            String path = "Graph/" + postF + date +".gv";
 
             try (FileOutputStream fos = new FileOutputStream(path)) {
                 byte[] buffer = graph.getBytes();

@@ -15,7 +15,7 @@ public class Main extends Application {
         prim = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Генератор тестов");
-        primaryStage.setScene(new Scene(root, 1000, 600));
+        primaryStage.setScene(new Scene(root, 900, 400));
         primaryStage.show();
     }
 
