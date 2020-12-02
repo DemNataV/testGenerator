@@ -53,6 +53,10 @@ public class ActionWithVariation implements Comparable<ActionWithVariation> {
         return this.getAction().getText() + " " + this.getVariation().getText();
     }
 
+    public String abb(){
+        return this.getAction().getAbbreviation() + " " + this.getVariation().getAbbreviation();
+    }
+
     @Override
     public String toString() {
         return "ActionWithVariation{" +

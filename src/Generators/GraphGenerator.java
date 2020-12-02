@@ -51,7 +51,7 @@ public class GraphGenerator {
                     String fs = avWithFS.get(i).getFinalState().name().replaceAll("\"", "");
 
                     if (!acvar.equals("null null") && !fs.equals("null null")) {
-                        graph = graph + "\n" + "\"" + acvar + "\"" + "->" + "\"" + fs + "\"" + " [color=" + color  + "];";
+                        graph = graph + "\n" + "\"" + acvar + "\"" + "->" + "\"" + fs + "\"" + " [color=" + color + "];";
                         graph = graph + "\n" + "\"" + acvar + "\"" + " [shape=box];";
                         if (avWithFS.get(i).getFinalState().getPriority() > 0) {
                             graph = graph + "\n" + "\"" + fs + "\"" + " [shape=triangle];";
@@ -73,6 +73,59 @@ public class GraphGenerator {
                 }
             }
             break;
+            case "Allabb": {
+
+                postF = "Allabb";
+
+                for (int i = 0; i < avWithFS.size(); i++) {
+                    if (avWithFS.get(i).getFinalState().getObject().equals(object)) {
+                        color = "blue";
+                    } else {
+                        color = "black";
+                    }
+
+                    String acvar = avWithFS.get(i).getActionWithVariation().name().replaceAll("\"", "");
+                    String fs = avWithFS.get(i).getFinalState().name().replaceAll("\"", "")
+                            .replaceAll("ж", "").replaceAll("б", "").replaceAll("в", "")
+                            .replaceAll("г", "").replaceAll("д", "").replaceAll("е", "")
+                            .replaceAll("з", "").replaceAll("с", "").replaceAll("к", "")
+                            .replaceAll("л", "").replaceAll("м", "").replaceAll("н", "")
+                            .replaceAll("т", "").replaceAll("п", "").replaceAll("р", "")
+                            .replaceAll("х", "").replaceAll("ш", "").replaceAll("ф", "")
+                            .replaceAll("[a-z]", "");;
+                    String acvarabb = avWithFS.get(i).getActionWithVariation().abb();
+
+                    if (!acvar.equals("null null") && !fs.equals("null null")) {
+                        graph = graph + "\n" + "\"" + acvarabb + "\"" + "->" + "\"" + fs + "\"" + " [color=" + color + "];";
+                        graph = graph + "\n" + "\"" + acvarabb + "\"" + " [shape=box];";
+                        if (avWithFS.get(i).getFinalState().getPriority() > 0) {
+                            graph = graph + "\n" + "\"" + fs + "\"" + " [shape=triangle];";
+                        }
+                    }
+                }
+
+                for (int i = 0; i < avWithIS.size(); i++) {
+                    for (int j = 0; j < avWithIS.get(i).getInitialStates().size(); j++) {
+
+                        String acvar = avWithIS.get(i).getActionWithVariation().name().replaceAll("\"", "");
+                        String is = avWithIS.get(i).getInitialStates().get(j).name().replaceAll("\"", "")
+                                .replaceAll("ж", "").replaceAll("б", "").replaceAll("в", "")
+                                .replaceAll("г", "").replaceAll("д", "").replaceAll("е", "")
+                                .replaceAll("з", "").replaceAll("с", "").replaceAll("к", "")
+                                .replaceAll("л", "").replaceAll("м", "").replaceAll("н", "")
+                                .replaceAll("т", "").replaceAll("п", "").replaceAll("р", "")
+                                .replaceAll("х", "").replaceAll("ш", "").replaceAll("ф", "")
+                                .replaceAll("[a-z]", "");
+                        String acvarabb = avWithIS.get(i).getActionWithVariation().abb();
+
+                        if (!acvar.equals("null null") && !is.equals("null null")) {
+                            graph = graph + "\n" + "\"" + is + "\"" + "->" + "\"" + acvarabb + "\"" + " [shape=ellipse];";
+                        }
+                    }
+
+                }
+            }
+            break;
 
             case "WithoutAssert": {
                 postF = "WithoutAssert";
@@ -85,8 +138,11 @@ public class GraphGenerator {
 
                     for (int j = 0; j < avWithIS.get(i).getInitialStates().size(); j++) {
 
-                        String acvar = avWithIS.get(i).getActionWithVariation().name().replaceAll("\"", "");
+                        // String acvar = avWithIS.get(i).getActionWithVariation().name().replaceAll("\"", "");
                         String is = avWithIS.get(i).getInitialStates().get(j).name().replaceAll("\"", "");
+
+                        String acvar = avWithIS.get(i).getActionWithVariation().abb().replaceAll("\"", "");
+
 
                         if (!acvar.equals("null null") && !is.equals("null null")) {
                             graph = graph + "\n" + "\"" + is + "\"" + "->" + "\"" + acvar + "\"" + ";";
@@ -176,6 +232,72 @@ public class GraphGenerator {
 
 
             }
+
+            case "WithoutAssertAndState": {
+                postF = "WithoutAssertAndState";
+                ArrayList<String> initialStates = new ArrayList<>();
+                //ArrayList<InitialState> initialStates = new ArrayList<>();
+
+                for (int i = 0; i < avWithIS.size(); i++) {
+
+                    //initialStates.addAll(avWithIS.get(i).getInitialStates());
+
+                    for (int j = 0; j < avWithIS.get(i).getInitialStates().size(); j++) {
+
+                        String acvaris = avWithIS.get(i).getActionWithVariation().name().replaceAll("\"", "");
+                        String is = avWithIS.get(i).getInitialStates().get(j).name().replaceAll("\"", "");
+
+                        String acvarisab = avWithIS.get(i).getActionWithVariation().abb();
+
+
+                        var AV = avWithFinalState.foundAV(avWithFS, avWithIS.get(i).getInitialStates().get(j));
+
+                        for (int k = 0; k < AV.size(); k++) {
+
+                            String acvarfsab = AV.get(k).abb();
+
+                            if (!acvaris.equals("null null") && !is.equals("null null")) {
+                                graph = graph + "\n" + "\"" + acvarisab + "\"" + "->" + "\"" + acvarfsab + "\"" + ";";
+                                // graph = graph + "\n" + "\"" + acvar + "\"" + " [shape=box];";
+
+                                initialStates.add(is);
+                            }
+                        }
+                    }
+                }
+
+                for (int i = 0; i < avWithFS.size(); i++) {
+                    if (avWithFS.get(i).getFinalState().getObject().equals(object)) {
+                        color = "blue";
+                    } else {
+                        color = "grey";
+                    }
+
+                    String acvarfs = avWithFS.get(i).getActionWithVariation().name().replaceAll("\"", "");
+                    String acvarfsab = avWithFS.get(i).getActionWithVariation().abb().replaceAll("\"", "");
+                    String fs = avWithFS.get(i).getFinalState().name().replaceAll("\"", "");
+
+                    if (!acvarfs.equals("null null") && !fs.equals("null null")) {
+                        int n = 0;
+                        for (int j = 0; j < initialStates.size(); j++) {
+                            if (fs.equals(initialStates.get(j))) {
+                                //n++;
+
+
+                               // graph = graph + "\n" + "\"" + acvaris + "\"" + "->" + "\"" + acvarfsab + "\"" + " [color=" + color + "];";
+                            }
+                        }
+                       /* if (n != 0) {
+
+                            graph = graph + "\n" + "\"" + acvar + "\"" + "->" + "\"" + fs + "\"" + " [color=" + color + "];";
+                            graph = graph + "\n" + "\"" + acvar + "\"" + " [shape=box];";
+                        }*/
+
+            }
+        }
+
+            }
+            break;
         }
             String date = String.valueOf(LocalDateTime.now());
             date=date.replaceAll(":","");
