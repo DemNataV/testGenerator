@@ -189,6 +189,21 @@ public class GraphGenerator {
                 for (int i = 0; i < avWithIS.size(); i++) {
 
                     //initialStates.addAll(avWithIS.get(i).getInitialStates());
+                    String acvar = avWithIS.get(i).getActionWithVariation().nameN().replaceAll("\"", "");
+                    String bgcolor = "white";
+                   if ("Килин".equals(avWithIS.get(i).getActionWithVariation().getAction().getLink())){
+                       bgcolor = "violet";}
+                       if ("Васенин".equals(avWithIS.get(i).getActionWithVariation().getAction().getLink())){
+                           bgcolor = "green";}
+                           if ("Сенишина".equals(avWithIS.get(i).getActionWithVariation().getAction().getLink())){
+                               bgcolor = "deepskyblue";}
+                               if ("Лепешкин".equals(avWithIS.get(i).getActionWithVariation().getAction().getLink())){
+                                   bgcolor = "lightpink";}
+                                   if ("Вдовкин".equals(avWithIS.get(i).getActionWithVariation().getAction().getLink())){
+                                       bgcolor = "yellow";}
+                                       if ("Коноплев".equals(avWithIS.get(i).getActionWithVariation().getAction().getLink())){
+                                           bgcolor = "orange";}
+
 
                     for (int j = 0; j < avWithIS.get(i).getInitialStates().size(); j++) {
 
@@ -196,7 +211,7 @@ public class GraphGenerator {
                         String is = avWithIS.get(i).getInitialStates().get(j).name().replaceAll("\"", "");
 
                         //String acvarAb = avWithIS.get(i).getActionWithVariation().abb().replaceAll("\"", "");
-                        String acvar = avWithIS.get(i).getActionWithVariation().nameN().replaceAll("\"", "");
+
 
 
                         if (!acvar.equals("null null") && !is.equals("null null")) {
@@ -204,7 +219,8 @@ public class GraphGenerator {
                             //graph = graph + "\n" + "\"" + is + "\"" + "->" + acvarAb + ";";
                            // graph = graph + "\n"  + acvarAb +  " [shape=box];";
                             graph = graph + "\n" + "\"" + is + "\"" + "->" + "\"" + acvar + "\"" + ";";
-                            graph = graph + "\n" + "\"" + acvar + "\"" + " [shape=box];";
+                            graph = graph + "\n" + "\"" + acvar + "\"" + " [shape=box,height=0.5,width=6, fixedsize=true, style=filled, fillcolor=" + bgcolor+"];";
+                            graph = graph + "\n" + "\"" + is + "\"" + " [height=0.5,width=6, fixedsize=true];";
 
                             initialStates.add(is);
                         }
@@ -222,6 +238,20 @@ public class GraphGenerator {
                     String acvar = avWithFS.get(i).getActionWithVariation().nameN().replaceAll("\"", "");
                     String fs = avWithFS.get(i).getFinalState().name().replaceAll("\"", "");
 
+                    String bgcolor = "white";
+                    if ("Килин".equals(avWithFS.get(i).getActionWithVariation().getAction().getLink())){
+                        bgcolor = "violet";}
+                    if ("Васенин".equals(avWithFS.get(i).getActionWithVariation().getAction().getLink())){
+                        bgcolor = "green";}
+                    if ("Сенишина".equals(avWithFS.get(i).getActionWithVariation().getAction().getLink())){
+                        bgcolor = "deepskyblue";}
+                    if ("Лепешкин".equals(avWithFS.get(i).getActionWithVariation().getAction().getLink())){
+                        bgcolor = "lightpink";}
+                    if ("Вдовкин".equals(avWithFS.get(i).getActionWithVariation().getAction().getLink())){
+                        bgcolor = "yellow";}
+                    if ("Коноплев".equals(avWithFS.get(i).getActionWithVariation().getAction().getLink())){
+                        bgcolor = "orange";}
+
                     if (!acvar.equals("null null") && !fs.equals("null null")) {
                         int n = 0;
                         for (int j = 0; j < initialStates.size(); j++) {
@@ -235,7 +265,9 @@ public class GraphGenerator {
                             //graph = graph + "\n" + "\"" + fs + "\"" + "->" +  acvarAb + ";";
                             //graph = graph + "\n" + "\"" + acvarAb + "\"" + " [shape=box];";
                             graph = graph + "\n" + "\"" + acvar + "\"" + "->" + "\"" + fs + "\"" + " [color=" + color + "];";
-                            graph = graph + "\n" + "\"" + acvar + "\"" + " [shape=box];";
+                           // graph = graph + "\n" + "\"" + acvar + "\"" + " [shape=box,height=0.5,width=3, fixedsize=true];";
+                            graph = graph + "\n" + "\"" + acvar + "\"" + " [shape=box,height=0.5,width=6, fixedsize=true, style=filled, fillcolor=" + bgcolor+"];";
+                            graph = graph + "\n" + "\"" + fs + "\"" + " [height=0.5,width=6, fixedsize=true];";
                         }
 
                     }

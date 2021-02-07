@@ -105,6 +105,7 @@ public class Action {
                 ", estimation=" + estimation +
                 ", abbreviation='" + abbreviation + '\'' +
                 ", link='" + link + '\'' +
+                ", Zone='" + Zone + '\'' +
                 ", parameters=" + parameters +
                 ", steps=" + steps +
                 ", initialStates=" + initialStates +
