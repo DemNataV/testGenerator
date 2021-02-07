@@ -9,6 +9,7 @@ public class Action {
     double estimation;
     String abbreviation;
     String link;
+    String Zone;
 
 
     ArrayList<Parameter> parameters;
@@ -86,6 +87,14 @@ public class Action {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getZone() {
+        return Zone;
+    }
+
+    public void setZone(String zone) {
+        Zone = zone;
     }
 
     @Override

@@ -127,8 +127,8 @@ public class GraphGenerator {
             }
             break;
 
-            case "WithoutAssert": {
-                postF = "WithoutAssert";
+            case "WithoutAssertAab": {
+                postF = "WithoutAssertAbb";
                 ArrayList<String> initialStates = new ArrayList<>();
                 //ArrayList<InitialState> initialStates = new ArrayList<>();
 
@@ -172,6 +172,68 @@ public class GraphGenerator {
                         }
                         if (n != 0) {
 
+                            graph = graph + "\n" + "\"" + acvar + "\"" + "->" + "\"" + fs + "\"" + " [color=" + color + "];";
+                            graph = graph + "\n" + "\"" + acvar + "\"" + " [shape=box];";
+                        }
+
+                    }
+                }
+
+            }
+            break;
+            case "WithoutAssertName": {
+                postF = "WithoutAssertName";
+                ArrayList<String> initialStates = new ArrayList<>();
+                //ArrayList<InitialState> initialStates = new ArrayList<>();
+
+                for (int i = 0; i < avWithIS.size(); i++) {
+
+                    //initialStates.addAll(avWithIS.get(i).getInitialStates());
+
+                    for (int j = 0; j < avWithIS.get(i).getInitialStates().size(); j++) {
+
+                        // String acvar = avWithIS.get(i).getActionWithVariation().name().replaceAll("\"", "");
+                        String is = avWithIS.get(i).getInitialStates().get(j).name().replaceAll("\"", "");
+
+                        //String acvarAb = avWithIS.get(i).getActionWithVariation().abb().replaceAll("\"", "");
+                        String acvar = avWithIS.get(i).getActionWithVariation().nameN().replaceAll("\"", "");
+
+
+                        if (!acvar.equals("null null") && !is.equals("null null")) {
+                           // graph = graph + "\n" + acvarAb + " [label=\"" +acvar+ "\"]";
+                            //graph = graph + "\n" + "\"" + is + "\"" + "->" + acvarAb + ";";
+                           // graph = graph + "\n"  + acvarAb +  " [shape=box];";
+                            graph = graph + "\n" + "\"" + is + "\"" + "->" + "\"" + acvar + "\"" + ";";
+                            graph = graph + "\n" + "\"" + acvar + "\"" + " [shape=box];";
+
+                            initialStates.add(is);
+                        }
+                    }
+                }
+
+                for (int i = 0; i < avWithFS.size(); i++) {
+                    if (avWithFS.get(i).getFinalState().getObject().equals(object)) {
+                        color = "blue";
+                    } else {
+                        color = "grey";
+                    }
+
+                    //String acvarAb = avWithFS.get(i).getActionWithVariation().abb().replaceAll("\"", "");
+                    String acvar = avWithFS.get(i).getActionWithVariation().nameN().replaceAll("\"", "");
+                    String fs = avWithFS.get(i).getFinalState().name().replaceAll("\"", "");
+
+                    if (!acvar.equals("null null") && !fs.equals("null null")) {
+                        int n = 0;
+                        for (int j = 0; j < initialStates.size(); j++) {
+                            if (fs.equals(initialStates.get(j))) {
+                                n++;
+                            }
+                        }
+                        if (n != 0) {
+
+
+                            //graph = graph + "\n" + "\"" + fs + "\"" + "->" +  acvarAb + ";";
+                            //graph = graph + "\n" + "\"" + acvarAb + "\"" + " [shape=box];";
                             graph = graph + "\n" + "\"" + acvar + "\"" + "->" + "\"" + fs + "\"" + " [color=" + color + "];";
                             graph = graph + "\n" + "\"" + acvar + "\"" + " [shape=box];";
                         }

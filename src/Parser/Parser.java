@@ -113,6 +113,11 @@ public class Parser {
                                 action.setLink(getAttributeValue(childNode, "VALUE"));
                             }
                         }
+                        if (getAttributeValue(childNode, "NAME").equals("Zone")) {
+                            if (!getAttributeValue(childNode, "VALUE").equals("")) {
+                                action.setLink(getAttributeValue(childNode, "VALUE"));
+                            }
+                        }
                     }
 
                     break;
