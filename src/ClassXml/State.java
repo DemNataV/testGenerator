@@ -58,9 +58,40 @@ public class State {
         this.object = object;
     }
 
-    public String name(){
+    public String nameSl(){
         return this.object + " " + this.value;
     }
+
+    public String name(){
+        return nameSl().replaceAll("\"", "");
+    }
+
+
+
+
+    public int height() {
+        return (int)Math.ceil(name().length()/20);
+    }
+
+    public String name20() {
+        String acvar20 = new String();
+
+
+        for (int o = 0; o < height() + 1; o++) {
+
+            if (o < height()) {
+                String acvaro = name().substring(o * 20, ((o + 1) * 20));
+                acvar20 = acvar20 + acvaro + "\\n";
+            } else {
+                String acvaro = name().substring(o * 20, name().length());
+                acvar20 = acvar20 + acvaro;
+            }
+
+        }
+        return acvar20;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

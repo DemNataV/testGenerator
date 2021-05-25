@@ -7,13 +7,13 @@ import Parser.Parser;
 public class TstGraph {
     public static void main(String[] args) {
         Parser parser = new Parser();
-        var actions = parser.parserToObject("координация+кц2.mm");
+        var actions = parser.parserToObject("Master14_05_21.mm");
 
         GraphGenerator graphGenerator = new GraphGenerator();
 
         graphGenerator.createGraph(actions, "", "WithoutAssertName");
         //System.out.println(graphGenerator.toString());
-        //printf(actions.toString());
+        //System.out.printf(actions.toString());
 
 
     }

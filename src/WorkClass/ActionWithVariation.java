@@ -50,7 +50,7 @@ public class ActionWithVariation implements Comparable<ActionWithVariation> {
     }
 
     public String name(){
-        return this.getAction().getText() + " " + this.getVariation().getText();
+        return this.getAction().getText().replaceAll("\"", "") + " " + this.getVariation().getText().replaceAll("\"", "");
     }
 
    // public String nameN(){return this.getAction().getText() + "\\l" + this.getVariation().getText()+ "\\l";}
@@ -61,6 +61,30 @@ public class ActionWithVariation implements Comparable<ActionWithVariation> {
 
     public String abb(){
         return this.getAction().getAbbreviation() + this.getVariation().getAbbreviation();
+    }
+
+
+
+    public int height() {
+        return (int)Math.ceil(name().length()/20);
+    }
+
+    public String name20() {
+        String acvar20 = new String();
+
+
+        for (int o = 0; o < height() + 1; o++) {
+
+            if (o < height()) {
+                String acvaro = name().substring(o * 20, ((o + 1) * 20));
+                acvar20 = acvar20 + acvaro + "\\n";
+            } else {
+                String acvaro = name().substring(o * 20, name().length());
+                acvar20 = acvar20 + acvaro;
+            }
+
+        }
+        return acvar20;
     }
 
     @Override

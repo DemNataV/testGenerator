@@ -5,7 +5,7 @@ import Parser.Parser;
 public class TstTest {
     public static void main(String[] args) {
         Parser parser = new Parser();
-        var actions = parser.parserToObject("new_version.mm");
+        var actions = parser.parserToObject("Master14_05_21.mm");
 
         TestGenerator testGenerator = new TestGenerator();
         int priority = 5;
